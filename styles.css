@@ -1,0 +1,138 @@
+/* Leraa. Tatto. AI-RULES v3, схема C (60/40) */
+:root{
+  --ink:#121011; --bone:#EEE7DF; --accent:#B7694F;
+  --t2:rgba(238,231,223,.75); --t3:rgba(238,231,223,.55); --line:rgba(238,231,223,.16);
+  --font:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --s1:4px; --s2:8px; --s3:16px; --s4:24px; --s5:40px; --s6:64px; --s7:104px; --s8:168px;
+  --gutter:clamp(20px,4vw,64px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--ink)}
+body{background:var(--ink);color:var(--bone);font-family:var(--font);font-weight:300;font-size:clamp(15px,1.1vw,18px);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+.wrap{padding-inline:var(--gutter)}
+.photo{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1) brightness(1.05)}
+
+/* типографика */
+h1,h2,h3{font-weight:300;letter-spacing:-.03em;line-height:.95;hyphens:none}
+h1{font-size:clamp(2.6rem,5.8vw,7rem)}
+h2{font-size:clamp(2.2rem,5vw,5.5rem)}
+p{color:var(--t2);max-width:56ch;text-wrap:pretty}
+h1,h2,h3,blockquote{text-wrap:balance}
+.logo,.nav a,dt{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:400}
+dt{color:var(--t3)}
+
+/* кнопки */
+.btn{position:relative;display:inline-flex;align-items:center;gap:var(--s3);min-height:52px;padding:0 var(--s4) 0 28px;border-radius:999px;overflow:hidden;isolation:isolate;font-size:15px;font-weight:400;cursor:pointer}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;transform:scaleX(0);transform-origin:left;transition:transform 500ms var(--ease)}
+.btn__label{transition:color 320ms var(--ease)}
+.btn__icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:transform 520ms var(--ease),color 320ms var(--ease)}
+.btn--solid{background:var(--bone);color:var(--ink)}
+.btn--solid::before{background:var(--accent)}
+.btn--solid:hover .btn__label,.btn--solid:hover .btn__icon{color:var(--bone)}
+.btn--ghost{border:1px solid var(--line);color:var(--bone)}
+.btn--ghost::before{background:var(--bone)}
+.btn--ghost:hover .btn__label,.btn--ghost:hover .btn__icon{color:var(--ink)}
+.btn:hover::before{transform:scaleX(1)}
+.btn:hover .btn__icon{transform:translate(3px,-3px)}
+.btn:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s4)}
+.note{font-size:13px;color:var(--t3)}
+
+/* ссылки с линией слева направо */
+.nav a,.link{position:relative;display:inline-block;padding-block:4px}
+.nav a::after,.link::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 480ms var(--ease)}
+.nav a:hover::after,.link:hover::after{transform:scaleX(1)}
+
+/* hero, схема C */
+.hero{display:grid;grid-template-columns:60fr 40fr;height:100svh;min-height:34rem}
+.hero__text{display:flex;flex-direction:column;justify-content:space-between;padding:var(--s4) var(--gutter) var(--s5)}
+.hero__top{display:flex;justify-content:space-between;align-items:center;gap:var(--s4)}
+.nav{display:flex;gap:var(--s5)}
+.hero__bottom{display:flex;flex-direction:column;gap:var(--s5)}
+.hero__photo{overflow:hidden;height:100%}
+.hero__photo .photo{object-position:50% 35%}
+
+/* секции */
+.section{padding-top:var(--s8)}
+.section__head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s5);margin-bottom:var(--s6)}
+.section__head p{font-size:14px;max-width:32ch;color:var(--t3);text-wrap:balance}
+
+/* работы */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr)}
+.gallery figure{overflow:hidden;aspect-ratio:3/4}
+.gallery img{transition:transform 800ms var(--ease)}
+.gallery figure:hover img{transform:scale(1.04)}
+.more{padding-top:var(--s6)}
+
+/* мастер, схема C зеркально */
+.master{display:grid;grid-template-columns:40fr 60fr;min-height:100svh;margin-top:var(--s8)}
+.master__photo{height:100%;overflow:hidden}
+.master__photo .photo{object-position:50% 30%}
+.master__text{display:flex;flex-direction:column;justify-content:flex-end;gap:var(--s4);padding:var(--s6) var(--gutter) var(--s5)}
+.facts{display:grid;gap:var(--s4);margin-top:var(--s4)}
+.facts dd{font-size:clamp(1rem,1.3vw,1.25rem);color:var(--bone);max-width:44ch;text-wrap:balance}
+
+/* услуги */
+.services{border-bottom:1px solid var(--line)}
+.service{display:grid;grid-template-columns:var(--s7) minmax(0,1fr) minmax(0,1.2fr) minmax(0,12rem);align-items:baseline;gap:var(--s4);padding:var(--s5) var(--gutter);border-top:1px solid var(--line)}
+.service__n{font-size:12px;letter-spacing:.18em;color:var(--t3)}
+.service h3{font-size:clamp(1.4rem,2.2vw,2.2rem);line-height:1.1;text-wrap:balance}
+.service p{font-size:15px;color:var(--t2)}
+.price{text-align:right;font-weight:400}
+
+/* единственное фирменное движение: превью работы у курсора */
+.preview{position:fixed;left:0;top:0;width:240px;height:320px;z-index:60;pointer-events:none;overflow:hidden;opacity:0;transform:translate3d(0,0,0) scale(.92);transition:opacity 420ms var(--ease)}
+.preview.is-on{opacity:1}
+
+/* отзывы */
+.reviews{border-bottom:1px solid var(--line)}
+.review{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,16rem);align-items:end;gap:var(--s4);padding:var(--s5) var(--gutter);border-top:1px solid var(--line)}
+.review blockquote{font-size:clamp(1.4rem,2.6vw,2.6rem);font-weight:300;letter-spacing:-.025em;line-height:1.05;max-width:28ch}
+.review__by{font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:400;color:var(--t3);text-align:right}
+
+/* контакты, схема C */
+.contact{display:grid;grid-template-columns:60fr 40fr;min-height:100svh;margin-top:var(--s8)}
+.contact__text{display:flex;flex-direction:column;justify-content:space-between;gap:var(--s6);padding:var(--s6) var(--gutter) var(--s4)}
+.contact__main{display:flex;flex-direction:column;gap:var(--s4)}
+.contact .cta-row{margin-top:var(--s4)}
+.contact__photo{height:100%;overflow:hidden}
+.contact__photo .photo{object-position:50% 50%}
+.footer{display:flex;justify-content:space-between;padding-top:var(--s4);border-top:1px solid var(--line);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--t3)}
+
+/* появление */
+.js .rise{opacity:0;transform:translateY(28px);filter:blur(14px);transition:opacity 900ms var(--ease),transform 900ms var(--ease),filter 900ms var(--ease);transition-delay:var(--d,0ms)}
+.js .rise.is-in,.js .is-in .rise{opacity:1;transform:none;filter:none}
+[data-d="0"]{--d:0ms}[data-d="100"]{--d:100ms}[data-d="150"]{--d:150ms}[data-d="200"]{--d:200ms}[data-d="250"]{--d:250ms}[data-d="300"]{--d:300ms}[data-d="400"]{--d:400ms}[data-d="420"]{--d:420ms}[data-d="600"]{--d:600ms}[data-d="900"]{--d:900ms}[data-d="1200"]{--d:1200ms}
+
+/* адаптив */
+@media (max-width:900px){
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .gallery figure:last-child{display:none}
+  .service{grid-template-columns:48px 1fr}
+  .service p,.price{grid-column:2}
+  .price{text-align:left}
+  .review{grid-template-columns:1fr}
+  .review__by{text-align:left}
+  .section__head{flex-direction:column;align-items:flex-start;gap:var(--s3)}
+}
+@media (max-width:700px){
+  .hero{grid-template-columns:1fr;grid-template-rows:42svh 1fr}
+  .hero__photo{grid-row:1}
+  .hero__text{grid-row:2;padding-top:var(--s3)}
+  .nav a:not(:last-child){display:none}
+  h1{font-size:clamp(2rem,9.4vw,3.4rem)}
+  .master,.contact{grid-template-columns:1fr;margin-top:var(--s7)}
+  .master__photo,.contact__photo{height:70svh}
+  .contact__photo{order:-1}
+  .section{padding-top:var(--s7)}
+}
+@media (hover:none){.preview{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .js .rise{opacity:1;transform:none;filter:none;transition:none;transition-delay:0ms}
+  *{scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
